@@ -1,0 +1,6 @@
+services:
+  main:
+    build:
+      target: base
+    # Keep the process running
+    command: sleep infinity

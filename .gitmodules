@@ -1,0 +1,6 @@
+[submodule "main"]
+	path = main
+	url = git@github.com:tower-online/tower-main.git
+[submodule "auth"]
+	path = auth
+	url = git@github.com:tower-online/tower-auth.git
