@@ -4,5 +4,6 @@
     "compose.extend.yaml"
   ],
   "service": "main",
+  "workspaceMount": "source=${localWorkspaceFolder}/main,target=/workspace,type=bind",
   "workspaceFolder": "/workspace"
 }
