@@ -3,6 +3,7 @@ services:
     build: main
     env_file:
       - .env
+      - main/settings.env
     ports:
       - ${TOWER_MAIN_LISTEN_PORT}:${TOWER_MAIN_LISTEN_PORT}
     secrets:
@@ -19,6 +20,7 @@ services:
     build: auth
     env_file:
       - .env
+      - auth/settings.env
     ports:
       - "8000:8000"
     restart: on-failure
