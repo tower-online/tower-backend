@@ -15,7 +15,7 @@ BEGIN
 END //
 DELIMITER ;
 
-CALL insert_dummies(1000);
+CALL insert_dummies(10000);
 DROP PROCEDURE IF EXISTS insert_dummies;
 
 
@@ -40,8 +40,8 @@ BEGIN
 
         SET i = i + 1;
     END WHILE;
-END;
+END //
 DELIMITER ;
 
-CALL insert_dummy_characters(1000);
+CALL insert_dummy_characters(10000);
 DROP PROCEDURE IF EXISTS insert_dummy_characters;
