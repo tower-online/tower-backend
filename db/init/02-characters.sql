@@ -45,10 +45,11 @@ CREATE TABLE character_skills
 );
 
 
-CREATE TABLE character_inventories
+CREATE TABLE character_items
 (
     character_id INT PRIMARY KEY,
-    items        JSON NOT NULL DEFAULT ('{}'),
+    item_type VARCHAR(16) NOT NULL,
+    place VARCHAR(6) NOT NULL DEFAULT 'INVEN' CHECK (place IN ('INVEN')),
 
     FOREIGN KEY (character_id) REFERENCES characters (id)
 );
@@ -87,7 +88,7 @@ BEGIN
     WHERE character_id = OLD.id;
 
     DELETE
-    FROM character_inventories
+    FROM character_items
     WHERE character_id = OLD.id;
 END //
 DELIMITER ;
