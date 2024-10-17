@@ -13,7 +13,7 @@ CREATE TABLE characters
 );
 CREATE INDEX idx_characters_user_id ON characters (user_id);
 
-
+-- TODO: Normalize this to one table for each stats
 CREATE TABLE character_stats
 (
     character_id INT PRIMARY KEY,
@@ -36,6 +36,7 @@ CREATE TABLE character_stats
 );
 
 
+-- TODO: Normalize this to one table for each skills
 CREATE TABLE character_skills
 (
     character_id INT PRIMARY KEY,
@@ -73,9 +74,6 @@ BEGIN
     VALUES (NEW.id);
 
     INSERT INTO character_skills (character_id)
-    VALUES (NEW.id);
-
-    INSERT INTO character_inventories (character_id)
     VALUES (NEW.id);
 END //
 DELIMITER ;
