@@ -54,6 +54,14 @@ CREATE TABLE character_items
     FOREIGN KEY (character_id) REFERENCES characters (id)
 );
 
+CREATE TABLE character_golds
+(
+    character_id INT PRIMARY KEY,
+    amount INT NOT NULL DEFAULT 0,
+
+    FOREIGN KEY (character_id) REFERENCES characters (id)
+);
+
 
 DELIMITER //
 CREATE TRIGGER after_character_insert

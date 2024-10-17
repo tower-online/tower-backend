@@ -1,4 +1,4 @@
-CREATE_TABLE item_types
+CREATE TABLE item_types
 (
     type_name VARCHAR(16) PRIMARY KEY
 );
@@ -14,12 +14,16 @@ BEGIN
     INTO types
     FROM item_types;
 
-    SET @sql = CONCAT('ALTER TABLE character_inventories ',
-                    'DROP CONSTRAINT IF EXISTS check_item_type, ',
-                    'ADD CONSTRAINT check_item_type',
-                    'CHECK (item_type IN (', types, '))');
+    SET @drop_sql = 'ALTER TABLE character_items DROP CONSTRAINT IF EXISTS check_item_type;';
+    PREPARE stmt FROM @drop_sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+
+    SET @add_sql = CONCAT('ALTER TABLE character_items ',
+                    'ADD CONSTRAINT check_item_type ',
+                    'CHECK (item_type IN (', types, '));');
     
-    PREPARE stmt FRMO @sql
+    PREPARE stmt FROM @add_sql;
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
 END //
@@ -30,7 +34,8 @@ DELIMITER //
 CREATE PROCEDURE add_item_type_and_update(IN new_item_type VARCHAR(16))
 BEGIN
     DECLARE type_exists INT;
-    SELECT COUNT(*) INTO type_exists;
+
+    SELECT COUNT(*) INTO type_exists
     FROM item_types
     WHERE type_name = new_item_type;
 
@@ -42,6 +47,6 @@ BEGIN
         SELECT CONCAT('New item type "', new_item_type, '" added and constraint updated.') AS result;
     ELSE
         SELECT CONCAT('New item type "', new_item_type, '" already exists.') AS result;
-    END IF
+    END IF;
 END //
 DELIMITER ;
