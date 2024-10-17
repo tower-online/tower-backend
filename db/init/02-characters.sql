@@ -75,6 +75,9 @@ BEGIN
 
     INSERT INTO character_skills (character_id)
     VALUES (NEW.id);
+
+    INSERT INTO character_golds (character_id)
+    VALUES (NEW.id);
 END //
 DELIMITER ;
 
