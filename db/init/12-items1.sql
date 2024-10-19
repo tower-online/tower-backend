@@ -1,35 +1,16 @@
 CREATE TABLE item_fist
 (
-    character_id INT PRIMARY KEY,
+    character_id INT,
+    item_id INT,
     damage SMALLINT NOT NULL,
 
-    FOREIGN KEY (character_id) REFERENCES characters (id)
-);
-
-
-CREATE TABLE item_bow
-(
-    character_id INT PRIMARY KEY,
-    damage SMALLINT NOT NULL,
-    durability SMALLINT NOT NULL,
-
-    FOREIGN KEY (character_id) REFERENCES characters (id)
-);
-
-CREATE TABLE item_sword
-(
-    character_id INT PRIMARY KEY,
-    damage SMALLINT NOT NULL,
-    durability SMALLINT NOT NULL,
-
-    FOREIGN KEY (character_id) REFERENCES characters (id)
+    PRIMARY KEY (character_id, item_id),
+    FOREIGN KEY (character_id) REFERENCES characters (id),
+    FOREIGN KEY (item_id) REFERENCES character_items (item_id)
 );
 
 
 INSERT INTO item_types
-VALUES
-    ('fist'),
-    ('bow'),
-    ('sword');
+VALUES ('fist');
 
 CALL update_item_type_constraint();

@@ -48,10 +48,12 @@ CREATE TABLE character_skills
 
 CREATE TABLE character_items
 (
-    character_id INT PRIMARY KEY,
+    character_id INT,
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
     item_type VARCHAR(16) NOT NULL,
     place VARCHAR(6) NOT NULL DEFAULT 'INVEN' CHECK (place IN ('INVEN')),
 
+    UNIQUE KEY (character_id, item_id),
     FOREIGN KEY (character_id) REFERENCES characters (id)
 );
 
